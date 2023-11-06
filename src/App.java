@@ -12,11 +12,8 @@ public class App extends Application {
             if (e.getCode() == KeyCode.ENTER) {
                 boardPane.startBall();
             }
-            if (e.getCode() == KeyCode.LEFT) {
-                boardPane.movePaddleLeft();
-            }
-            if (e.getCode() == KeyCode.RIGHT) {
-                boardPane.movePaddleRight();
+            if (e.getCode() == KeyCode.LEFT || e.getCode() == KeyCode.RIGHT) {
+                boardPane.movePaddle(e);
             }
         });
 
