@@ -19,16 +19,12 @@ public class BoardPane extends Pane {
     private Rectangle paddle = new Rectangle(paddleX, paddleY, paddleWidth, paddleHeight);
 
     Timeline ballAnimation;
+    BricksPane bricksPane = new BricksPane();
 
     public BoardPane() {
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 3; j++) {
-                getChildren().add(new Rectangle(i * 110 + 10, j * 50 + 10, 100, 20));
-            }
-        }
         ball.setFill(Color.GREEN);
         paddle.setFill(Color.BLUE);
-        getChildren().addAll(ball, paddle);
+        getChildren().addAll(ball, paddle, bricksPane);
         ballAnimation = new Timeline(new KeyFrame(new Duration(5), e -> moveBall()));
         ballAnimation.setCycleCount(Timeline.INDEFINITE); // animation runs forever
     }
