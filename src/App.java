@@ -10,9 +10,8 @@ public class App extends Application {
 
         boardPane.setOnKeyPressed(e -> { // event e is of KeyPressed type
             if (e.getCode() == KeyCode.ENTER) {
-                boardPane.startBall();
-            }
-            if (e.getCode() == KeyCode.LEFT || e.getCode() == KeyCode.RIGHT) {
+                boardPane.play();
+            } else if (e.getCode() == KeyCode.LEFT || e.getCode() == KeyCode.RIGHT) {
                 boardPane.movePaddle(e);
             }
         });
