@@ -1,6 +1,8 @@
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -15,6 +17,7 @@ public class BoardPane extends Pane {
     private Circle ball = new Circle(ballX, ballY, radius);
     private double dx = 1, dy = 1;
     private double speed = 20;
+
     private double paddleX = 350, paddleY = 600, paddleWidth = 150, paddleHeight = 20;
     private Rectangle paddle = new Rectangle(paddleX, paddleY, paddleWidth, paddleHeight);
 
@@ -41,16 +44,24 @@ public class BoardPane extends Pane {
             ballAnimation.stop();
         } else if (ballY < radius) {
             dy *= -1; // change direction of y
-        } else if (paddle.intersects(ball.getBoundsInLocal())) {
-            dy *= -1;
         } else if (ballX + radius > getWidth() || ballX < radius) {
             dx *= -1;
+        } else if (paddle.intersects(ball.getBoundsInLocal())) {
+            dy *= -1;
+        } else if (bricksPane.intersects(ball).equals("hit along y direction")) {
+            dy *= -1;
+        } else if (bricksPane.intersects(ball).equals("hit along x direction")) {
+            dx *= -1;
+            System.out.println("x direction");
         }
-
         ballX += dx;
         ballY += dy;
         ball.setCenterX(ballX);
         ball.setCenterY(ballY);
+    }
+
+    public IntegerProperty getScoreProperty() {
+        return bricksPane.getScoreProperty();
     }
 
     protected void movePaddle(KeyEvent e) {
